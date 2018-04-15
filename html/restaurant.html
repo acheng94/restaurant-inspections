@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <style>
+    table, td  {
+      border: 1px solid grey;
+      border-collapse: collapse;
+      padding: 5px;
+    }
+  </style>
+  <head>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/script.js"></script>
+  </head>
+  <body ng-app="NYCBikes">
+    <div ng-controller="bikeController">
+      
+      <center><h1 style="color: #4CAF50">Restaurant</h1></center>
+      
+      <input type="text" class="form-control" placeholder="Search Station Name" ng-model="search.stationName">
+      
+      <table>
+        <thead>
+          <td>stationName</td>
+          <td>availableDocks</td>
+          <td>totalDocks</td>
+          <td>availableBikes</td>
+          <td>lastCommunicationTime</td>
+          <td>statusValue</td>
+        </thead>
+        <tr ng-repeat="x in data | filter:search">
+          <td>{{ x.stationName }}</td>
+          <td>{{ x.availableDocks }}</td>
+          <td>{{ x.totalDocks }}</td>
+          <td>{{ x.availableBikes }}</td>
+          <td>{{ x.lastCommunicationTime }}</td>
+          <td>{{ x.statusValue }}</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>
