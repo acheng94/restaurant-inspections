@@ -1,7 +1,22 @@
 <!DOCTYPE html>
 <html>
- 
+
+  <head>
+    <title>Detail</title>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="/detail.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cutive">
+  </head>
+  
   <style>
+  
+    body {
+      background-color: #16a085;
+    }
+  
     #tableindex {
         font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
         border-collapse: collapse;
@@ -26,39 +41,57 @@
         background-color: #4CAF50;
         color: white;
     }
+  
+    .container {
+      background-color: #ecf0f1;
+      width: 75%;
+      height: 100%;
+      margin: 10px auto;
+      
+      
+      /*
+      position: relative;
+      height: 100%;
+      width: 1250px;
+      max-width: 1250px;
+      */
+    }
+  
+    h1 {
+      color: #16a085;
+      font-family: 'Cutive';
+      text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    }
+
   </style>
   
-  <head>
-    <title>Detail</title>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="/detail.js"></script>
-  </head>
-  <body>
-    <center><h1 style="color: #4CAF50">Detail</h1></center>
-    <body ng-app="Detail">
-      <div ng-controller="detailController">
+  <body ng-app="Detail">
+    <div ng-controller="detailController">
       
-        <center><input type="text" placeholder="Search by ID..." id="searchid">
-        <button ng-click="changeDetailController()">Submit</button></center><br>
+      <div class="container"><center><h1>Detail</h1></center></div>
       
-        <table id="tableindex" ng-repeat="x in data">
-          <tr><td>ID</td><td> {{ x.id }} </td></tr>
-          <tr><td>Name</td><td> {{ x.name }} </td></tr>
-          <tr><td>Neighborhood</td><td> {{ x.neighborhood }} </td></tr>
-          <tr><td>Address</td><td> {{ x.address }} </td></tr>
-          <tr><td>City</td><td> {{ x.city }} </td></tr>
-          <tr><td>State</td><td> {{ x.state }} </td></tr>
-          <tr><td>Postal code</td><td> {{ x.postal_code }} </td></tr>
-          <tr><td>Latitude</td><td> {{ x.latitude }} </td></tr>
-          <tr><td>Longitude</td><td> {{ x.longitude }} </td></tr>
-          <tr><td>Stars</td><td> {{ x.stars }} </td></tr>
-          <tr><td>Review_count</td><td> {{ x.review_count }} </td></tr>
-          <tr><td>Is open</td><td> {{ x.is_open }} </td></tr>
-        </table>
+      <div class="container"> <center><input type="text" placeholder="Search by ID..." id="searchid">
+      <button ng-click="changeDetailController()">Submit</button></center><br>
       </div>
+    
+      <div class="container">
+      <table id="tableindex" ng-repeat="x in data">
+        <tr><td>ID</td><td> {{ x.id }} </td></tr>
+        <tr><td>Name</td><td> {{ x.name }} </td></tr>
+        <tr><td>Neighborhood</td><td> {{ x.neighborhood }} </td></tr>
+        <tr><td>Address</td><td> {{ x.address }} </td></tr>
+        <tr><td>City</td><td> {{ x.city }} </td></tr>
+        <tr><td>State</td><td> {{ x.state }} </td></tr>
+        <tr><td>Postal code</td><td> {{ x.postal_code }} </td></tr>
+        <tr><td>Latitude</td><td> {{ x.latitude }} </td></tr>
+        <tr><td>Longitude</td><td> {{ x.longitude }} </td></tr>
+        <tr><td>Stars</td><td> {{ x.stars }} </td></tr>
+        <tr><td>Review_count</td><td> {{ x.review_count }} </td></tr>
+        <tr><td>Is open</td><td> {{ x.is_open }} </td></tr>
+      </table>
+      </div>
+    </div>
+
   </body>
 </html>
 
