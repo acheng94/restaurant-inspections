@@ -3,6 +3,11 @@ var app = angular.module('Detail',[]);
 app.controller('detailController', function($scope, $http) {
   $scope.yelpdata = "";
   $scope.inspectiondata = "";
+  
+  $scope.dateSubstr = function(datetime) {
+    return datetime.substring(0,10)
+  }
+  
   $scope.changeDetailController = function () {
 
     var val = document.getElementById("searchid").value;

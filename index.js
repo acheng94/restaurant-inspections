@@ -86,7 +86,7 @@ app.get('/detail_yelp/:values', function(request, response) {
 })
 
 app.get('/detail_insp/:values', function(request, response) {
-  var query = 'SELECT * FROM (SELECT name,address FROM business WHERE id=' + '\'' + request.params.values + '\'' + ') baddr JOIN healthinspect h ON (baddr.name LIKE CONCAT(\'%\', h.restaurantname, \'%\') OR h.restaurantname LIKE CONCAT(\'%\', baddr.name, \'%\')) AND (baddr.address LIKE CONCAT(\'%\', h.address, \'%\') OR h.address LIKE CONCAT(\'%\', baddr.address, \'%\'))';
+  var query = 'SELECT * FROM (SELECT id,demerits,grade,violations FROM (SELECT name,address FROM business WHERE id=' + '\'' + request.params.values + '\'' + ') baddr JOIN healthinspect h ON (baddr.name LIKE CONCAT(\'%\', h.restaurantname, \'%\') OR h.restaurantname LIKE CONCAT(\'%\', baddr.name, \'%\')) AND (baddr.address LIKE CONCAT(\'%\', h.address, \'%\') OR h.address LIKE CONCAT(\'%\', baddr.address, \'%\'))) insp JOIN inspectdate dt ON insp.id=dt.id ORDER BY dt.inspectiondate DESC';
   connection.query(query, function (error, results, fields) {
     if (error) {
       response.send(error.sqlMessage);
@@ -98,7 +98,7 @@ app.get('/detail_insp/:values', function(request, response) {
 })
 
 app.get('/detail_vio/:values', function(request, response) {
-  var query = 'SELECT violation,`Violation Description` FROM (SELECT DISTINCT violation FROM (SELECT h.id FROM (SELECT name,address FROM business WHERE id=' + '\'' + request.params.values + '\'' + ') baddr JOIN healthinspect h ON (baddr.name LIKE CONCAT(\'%\', h.restaurantname, \'%\') OR h.restaurantname LIKE CONCAT(\'%\', baddr.name, \'%\')) AND (baddr.address LIKE CONCAT(\'%\', h.address, \'%\') OR h.address LIKE CONCAT(\'%\', baddr.address, \'%\'))) hids JOIN inspection_violations v ON hids.id=v.id) vids LEFT JOIN codes c ON violation=`Violation Id`';
+  var query = 'SELECT violation,`Violation Description` FROM (SELECT DISTINCT violation FROM (SELECT h.id FROM (SELECT name,address FROM business WHERE id=' + '\'' + request.params.values + '\'' + ') baddr JOIN healthinspect h ON (baddr.name LIKE CONCAT(\'%\', h.restaurantname, \'%\') OR h.restaurantname LIKE CONCAT(\'%\', baddr.name, \'%\')) AND (baddr.address LIKE CONCAT(\'%\', h.address, \'%\') OR h.address LIKE CONCAT(\'%\', baddr.address, \'%\'))) hids JOIN inspection_violations v ON hids.id=v.id) vids LEFT JOIN codes c ON violation=`Violation Id` ORDER BY violation ASC';
   connection.query(query, function (error, results, fields) {
     if (error) {
       response.send(error.sqlMessage);
