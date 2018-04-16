@@ -13,40 +13,48 @@
   
   <style>
   
+    html, body {
+      margin: 0px;
+    }
+  
     body {
       background-color: #16a085;
+      padding: 0px;
     }
   
     #tableindex {
         font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
         border-collapse: collapse;
-        width: 50%;
-        margin-left: 25%;
-        margin-right: 25%;
+        table-layout:fixed;
+        width: 80%;
+        margin-left: 10%;
+        margin-right: 10%;
     }
 
     #tableindex td, #tableindex th {
-        border: 1px solid #ddd;
+        border: 3px solid #f39c12;
         padding: 8px;
+        word-wrap:break-word;
     }
 
-    #tableindex tr:nth-child(even){background-color: #f2f2f2;}
+    #tableindex tr:nth-child(even){background-color: #f1c40f;}
 
-    #tableindex tr:hover {background-color: #ddd;}
+    #tableindex tr:hover {background-color: #f39c12;}
 
     #tableindex th {
         padding-top: 12px;
         padding-bottom: 12px;
         text-align: left;
-        background-color: #4CAF50;
+        background-color: #f39c12;
         color: white;
     }
   
     .container {
+      position:relative;
       background-color: #ecf0f1;
-      width: 75%;
+      width: 70%;
       height: 100%;
-      margin: 10px auto;
+      margin: 20px auto;
       
       
       /*
@@ -57,40 +65,152 @@
       */
     }
   
-    h1 {
-      color: #16a085;
-      font-family: 'Cutive';
-      text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    .btn-group {
+      position:relative;
+      background-color: Transparent;
+      width: 70%;
+      height: 100%;
+      margin: 0px auto;
     }
+  
+    .btn-group button {
+      background-color: Transparent; /* Green background */
+      border: none; /* Green border */
+      cursor: pointer; /* Pointer/hand icon */
+      float: left; /* Float the buttons side by side */
+      font-family: 'Cutive';
+    }
+
+    .btn-group .logo {
+      text-align: left;
+      padding: 10px 24px; /* Some padding */
+      font-size: 30px;
+      color: #16a085;
+      text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
+    }
+
+    .menu button {
+      color: white; /* White text */
+      padding: 10px 24px; /* Some padding */
+      font-size: 15px;
+    }
+
+    /* Clear floats (clearfix hack) */
+    .btn-group:after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+
+    .btn-group button:not(:last-child) {
+      border-right: none; /* Prevent double borders */
+    }
+  
+    /* Get rid of blue outline */
+    .btn-group button:focus {
+      outline:0;
+    }
+
+    /* Add a background color on hover */
+    .menu button:hover {
+      background-color: #1abc9c;
+    }
+  
+    h1 {
+      font-family: 'Cutive';
+      color: #16a085;
+      text-shadow: -1px 0 #2c3e50, 0 1px #2c3e50, 1px 0 #2c3e50, 0 -1px #2c3e50;
+    }
+  
+    .wrappable { overflow: hidden; word-wrap: break-word; }
+  
 
   </style>
   
   <body ng-app="Detail">
-    <div ng-controller="detailController">
-      
-      <div class="container"><center><h1>Detail</h1></center></div>
-      
-      <div class="container"> <center><input type="text" placeholder="Search by ID..." id="searchid">
-      <button ng-click="changeDetailController()">Submit</button></center><br>
-      </div>
-    
-      <div class="container">
-      <table id="tableindex" ng-repeat="x in data">
-        <tr><td>ID</td><td> {{ x.id }} </td></tr>
-        <tr><td>Name</td><td> {{ x.name }} </td></tr>
-        <tr><td>Neighborhood</td><td> {{ x.neighborhood }} </td></tr>
-        <tr><td>Address</td><td> {{ x.address }} </td></tr>
-        <tr><td>City</td><td> {{ x.city }} </td></tr>
-        <tr><td>State</td><td> {{ x.state }} </td></tr>
-        <tr><td>Postal code</td><td> {{ x.postal_code }} </td></tr>
-        <tr><td>Latitude</td><td> {{ x.latitude }} </td></tr>
-        <tr><td>Longitude</td><td> {{ x.longitude }} </td></tr>
-        <tr><td>Stars</td><td> {{ x.stars }} </td></tr>
-        <tr><td>Review_count</td><td> {{ x.review_count }} </td></tr>
-        <tr><td>Is open</td><td> {{ x.is_open }} </td></tr>
-      </table>
+    <div class="btn-group">
+      <button class="logo" onclick="location.href = '/';">safe4eats</button>
+      <div class="menu">
+        <button onclick="location.href = 'search';">Search</button>
+        <button onclick="location.href = 'ranking';">Ranking</button>
+        <button onclick="location.href = 'restaurant';">Restaurants</button>
+        <button onclick="location.href = 'detail';">Details</button>
       </div>
     </div>
+    <div ng-controller="detailController">
+      
+      <div class="container">
+        <center><h1>Search by ID</h1></center>
+        <center><input type="text" placeholder="Search by ID..." id="searchid">
+        <button ng-click="changeDetailController()">Submit</button></center><br>
+      </div>
+      
+      <div class="container" id="noyelpcontainer" style="display:none">
+        <p>Sorry, we were unable to find that yelp restaurant id.</p>
+      </div>
+      
+      <div class="container" id="yelpcontainer" style="display: none">
+        <center><h1>Restaurant Details</h1></center>
+        <table id="tableindex" ng-repeat="x in yelpdata">
+          <tr><th style="width: 30%">Field</th><th style="width: 70%">Result</th></tr>
+          <tr><td style="width: 30%">ID</td><td style="width: 70%"> {{ x.id }} </td></tr>
+          <tr><td style="width: 30%">Name</td><td style="width: 70%"> {{ x.name }} </td></tr>
+          <tr><td style="width: 30%">Neighborhood</td><td style="width: 70%"> {{ x.neighborhood }} </td></tr>
+          <tr><td style="width: 30%">Address</td><td style="width: 70%"> {{ x.address }} </td></tr>
+          <tr><td style="width: 30%">City</td><td style="width: 70%"> {{ x.city }} </td></tr>
+          <tr><td style="width: 30%">State</td><td style="width: 70%"> {{ x.state }} </td></tr>
+          <tr><td style="width: 30%">Postal code</td><td style="width: 70%"> {{ x.postal_code }} </td></tr>
+          <tr><td style="width: 30%">Latitude</td><td style="width: 70%"> {{ x.latitude }} </td></tr>
+          <tr><td style="width: 30%">Longitude</td><td style="width: 70%"> {{ x.longitude }} </td></tr>
+          <tr><td style="width: 30%">Stars</td><td style="width: 70%"> {{ x.stars }} </td></tr>
+          <tr><td style="width: 30%">Review_count</td><td style="width: 70%"> {{ x.review_count }} </td></tr>
+          <tr><td style="width: 30%">Is open</td><td style="width: 70%"> {{ x.is_open }} </td></tr>
+        </table>
+        <br>
+      </div>
+      
+      <div class="container" id="noinspcontainer" style="display:none">
+        <p>Sorry, we could not find any inspection reports for this restaurant.</p>
+      </div>
+      
+      <div class="container" id="inspcontainer" style="display: none">
+        <center><h1>Inspection Results</h1></center>
+        <table id="tableindex">
+          <tr>
+            <th style="width: 20%">Date</th>
+            <th style="width: 20%">ID</th>
+            <th style="width: 10%">Grade</th>
+            <th style="width: 15%">Demerits</th>
+            <th style="width: 35%">Violations</th>
+          </tr>
+          <tr ng-repeat="x in inspdata">
+            <td style="width: 20%"> {{ x.id }} </td>
+            <td style="width: 20%"> {{ x.id }} </td>
+            <td style="width: 10%"> {{ x.grade }} </td>
+            <td style="width: 15%"> {{ x.demerits }} </td>
+            <td style="width: 35%"> {{ x.violations }} </td>
+          </tr>
+        </table>
+        <br>
+      </div>
+      
+      <div class="container" id="viocontainer" style="display: none">
+        <center><h1>Violation History</h1></center>
+        <table id="tableindex">
+          <tr>
+            <th style="width: 30%">Violation Code</th>
+            <th style="width: 70%">Violation Description</th>
+          </tr>
+          </th>
+          <tr ng-repeat="x in viodata">
+            <td style="width: 30%"> {{ x.violation }} </td>
+            <td style="width: 70%"> {{ x['Violation Description'] }} </td>
+          </tr>
+        </table>
+        <br>
+      </div>
+    </div>
+    
 
   </body>
 </html>
