@@ -2,20 +2,131 @@
 <html>
   
   <head>
-    <title>NomSafe</title>
+    <title>safe4eats</title>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <style>
+      body {
+        background-color: #16a085;
+        background-position: center top;
+        background-repeat: no-repeat;
+      }
+    
+      .logo {
+        position: relative;
+        width: 1250px;
+        max-width: 1250px;
+        height: 800px;
+        max-height: 800px;
+      }
+    
+      .logo img {
+        width: 1250px;
+        height: 800px;
+      }
+
+      .roundbutton {
+      background-color: #16a085;
+      border: 10px solid #ecf0f1;
+      color: #ecf0f1;
+      /*
+      height: 180px;
+      width: 200px;
+      border-radius: 50px;
+      */
+      height: 160px;
+      width: 190px;
+      border-radius: 50%;
+      padding: 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 20px;
+      font-weight: bold;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+    
+    .roundbutton:hover {
+      background-color: #1abc9c;
+    }
+    
+    .logo .searchButton {
+      position: absolute;
+      top: 12%;
+      left: 60%;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+    }
+    
+    .logo .rankingButton {
+      position: absolute;
+      top: 27%;
+      left: 75%;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+    }
+    
+    .logo .restaurantButton {
+      position: absolute;
+      top: 72%;
+      left: 22%;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+    }
+    
+    .logo .detailButton {
+      position: absolute;
+      top: 87%;
+      left: 37%;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+    }
+    
+/*
+    .rankingButton {
+      position:absolute;
+      transition: .5s ease;
+      top: 150px;
+      left: 60%;
+    }
+    
+    .restaurantButton {
+      position:absolute;
+      transition: .5s ease;
+      top: 500px;
+      left: 25%;
+    }
+    
+    .detailButton {
+      position:absolute;
+      transition: .5s ease;
+      top: 75%;
+      left: 35%;
+    }
+*/
+    
+    </style>
   </head>
   <body>
-    <center><h1 style="color: #4CAF50">NomSafe</h1></center>
-    <p>Home (Page 0)</p>
+    <center>
+    <div class="logo">
+      <img src="templogo.png">
+      <button class="roundbutton searchButton" onclick="location.href = 'search';" id="searchButton" >search</button>
+      <button class="roundbutton rankingButton" onclick="location.href = 'ranking';" id="rankingButton" >ranking</button>
+      <button class="roundbutton restaurantButton" onclick="location.href = 'restaurant';" id="restaurantButton" >restaurants</button>
+      <button class="roundbutton detailButton" onclick="location.href = 'detail';" id="detailButton" >details</button>
+    </div>
+    </center>
+<!--
     <p><a href="search">Search by Cuisine (Page 1)</a></p>
     <p><a href="ranking">Top 10 Ranking (Page 2)</a></p>
     <p><a href="restaurant">Find Restaurant by Name (Page 3)</a></p>
     <p><a href="detail">Restaurant Detail (Page 4)</a></p>
-      
+-->
   </body>
 </html>
 

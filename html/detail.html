@@ -41,24 +41,22 @@
     <body ng-app="Detail">
       <div ng-controller="detailController">
       
-        <input type="text" placeholder="Search by ID..." id="searchid">
-        <button ng-click="changeDetailController()">Submit</button>
+        <center><input type="text" placeholder="Search by ID..." id="searchid">
+        <button ng-click="changeDetailController()">Submit</button></center><br>
       
-        <table id="tableindex">
-          <tr ng-repeat="x in data">
-            <td> {{ x.id }} </td>
-            <td> {{ x.name }} </td>
-            <td> {{ x.neighborhood }} </td>
-            <td> {{ x.address }} </td>
-            <td> {{ x.city }} </td>
-            <td> {{ x.state }} </td>
-            <td> {{ x.postal_code }} </td>
-            <td> {{ x.latitude }} </td>
-            <td> {{ x.longitude }} </td>
-            <td> {{ x.stars }} </td>
-            <td> {{ x.review_count }} </td>
-            <td> {{ x.is_open }} </td>
-          </tr>
+        <table id="tableindex" ng-repeat="x in data">
+          <tr><td>ID</td><td> {{ x.id }} </td></tr>
+          <tr><td>Name</td><td> {{ x.name }} </td></tr>
+          <tr><td>Neighborhood</td><td> {{ x.neighborhood }} </td></tr>
+          <tr><td>Address</td><td> {{ x.address }} </td></tr>
+          <tr><td>City</td><td> {{ x.city }} </td></tr>
+          <tr><td>State</td><td> {{ x.state }} </td></tr>
+          <tr><td>Postal code</td><td> {{ x.postal_code }} </td></tr>
+          <tr><td>Latitude</td><td> {{ x.latitude }} </td></tr>
+          <tr><td>Longitude</td><td> {{ x.longitude }} </td></tr>
+          <tr><td>Stars</td><td> {{ x.stars }} </td></tr>
+          <tr><td>Review_count</td><td> {{ x.review_count }} </td></tr>
+          <tr><td>Is open</td><td> {{ x.is_open }} </td></tr>
         </table>
       </div>
   </body>
