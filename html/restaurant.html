@@ -40,14 +40,38 @@
     <center><h1 style="color: #4CAF50">Restaurant</h1></center>
     <body ng-app="Restaurant">
       <div ng-controller="restaurantController">
+        <p>
+            Enter name:  
+            <input ng-model="searchName" placeholder="Name">
+            <button ng-click="loadData()">Search</button>
+            <br />
+        </p> 
         <table id="tableindex">
+            <!-- Show table header -->
+            <tr>
+                <td><strong>ID</strong></td>
+                <td><strong>Name</strong></td>
+                <td><strong>Address</strong></td>
+                <td><strong>Stars</strong></td>
+                <td><strong># of Violations</strong></td>
+            </tr>
+            <!-- Render table data -->
+            <tr ng-repeat="x in data">
+                <td>{{ x.id }}</td>
+                <td><a ng-href="/detail?id={{ x.id }}">{{ x.name }}</a></td>
+                <td>{{ x.address }}</td>
+                <td>{{ x.stars }}</td>
+                <td>{{ x.violation_count }}</td>
+           </tr>
+        </table>
+        <!-- <table id="tableindex">
           <tr>
             <th>Table Name</th>
           </tr>
           <tr ng-repeat="x in data">
             <td> {{ x.Tables_in_yelp_db }} </td>
           </tr>
-        </table>
+        </table> -->
       </div>
   </body>
 </html>

@@ -1,10 +1,14 @@
 var app = angular.module('Restaurant',[]);
 
 app.controller('restaurantController', function($scope, $http) {
-  var url = '/show_tables';
-  var request = $http.get(url);
-  request.success(function(data) {
-    $scope.data = data;
-  });
-               
+  $scope.loadData = function () {
+        var request = $http.get("/get_restaurants/" + $scope.searchName);
+        request.success(function(data) {
+            $scope.data = data;
+        });
+        request.error(function(data){
+            $scope.data = '';
+            console.log('err');
+        });
+    };
 });

@@ -109,6 +109,33 @@ app.get('/detail_vio/:values', function(request, response) {
   });
 })
 
+/*** Return list of restaurants for a search term ***/
+app.get('/get_restaurants/:values', function(request, response) {
+  var query = 'select all_dates.id, all_dates.name, all_dates.address, all_dates.stars, max(all_dates.idate) as most_recent_inspection, \
+                    all_dates.violation_count from \
+                    (select r.id as id, r.name as name, r.address as address, r.stars as stars, i.inspectiondate as idate, count(iv.id) as violation_count \
+                        from restaurants r \
+                        join inspections i \
+                        on r.address = i.address \
+                        join inspection_violations iv \
+                        on i.id = iv.id \
+                        join restaurant_category rc \
+                        on rc.business_id = r.id \
+                        and LOCATE(r.name, i.restaurantname) > 0 \
+                        group by r.id, r.name, r.address, r.stars, i.inspectiondate) all_dates \
+                    where all_dates.name like "%' + request.params.values + '%" \
+                    group by all_dates.id, all_dates.name, all_dates.address, all_dates.stars \
+                    limit 10';
+  connection.query(query, function (error, results, fields) {
+    if (error) {
+      response.send(error.sqlMessage);
+    } else {
+      console.log(results);
+      response.json(results);
+    }
+  });
+})
+
 /*****************************************************************************************
  * HTML
  *****************************************************************************************/
@@ -130,6 +157,10 @@ app.get('/restaurant', function(request, response) {
 })
 
 app.get('/detail', function(request, response) {
+  response.sendFile(path.join(__dirname, '/', 'html/detail.html'));
+})
+
+app.get('/detail/', function(request, response) {
   response.sendFile(path.join(__dirname, '/', 'html/detail.html'));
 })
 
