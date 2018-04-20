@@ -1,0 +1,111 @@
+/* get rid of margins */
+html, body {
+  margin: 0px;
+}
+
+/* set background color and get rid of padding */
+body {
+  background-color: #16a085;
+  padding: 0px;
+}
+
+/* Set table layout/sizes */
+#tableindex {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  table-layout:fixed;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+/*  Format header and rows */
+#tableindex td, #tableindex th {
+    border: 3px solid #f39c12;
+    padding: 8px;
+    word-wrap:break-word;
+}
+
+/* Changes color of even rows */
+#tableindex tr:nth-child(even){background-color: #f1c40f;}
+
+/* Changes color of row when hovering */
+#tableindex tr:hover {background-color: #f39c12;}
+
+/* Header row specific formatting */
+#tableindex th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #f39c12;
+    color: white;
+}
+
+/* Overall container */
+.container {
+  position:relative;
+  background-color: #ecf0f1;
+  width: 70%;
+  height: 100%;
+  margin: 20px auto;
+}
+
+/* Menu */
+.menudiv {
+  position:relative;
+  background-color: Transparent;
+  width: 70%;
+  height: 100%;
+  margin: 0px auto;
+}
+
+/* menu buttons */
+.menudiv button {
+  background-color: Transparent;
+  border: none;
+  cursor: pointer;
+  float: left;
+  font-family: 'Cutive';
+}
+
+/* Logo */
+.menudiv .logo {
+  text-align: left;
+  padding: 10px 25px;
+  font-size: 30px;
+  color: #16a085;
+  text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
+}
+
+/* Clear floats */
+.menudiv:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Get rid of annoying blue outline after clicking */
+.menudiv button:focus {
+  outline:0;
+}
+
+/* Configure text inside menu buttons */
+.menu button {
+  color: white;
+  padding: 10px 25px;
+  font-size: 15px;
+}
+
+/* Add a background color on menu hover */
+.menu button:hover {
+  background-color: #1abc9c;
+}
+
+/* Set Header Style */
+h1 {
+  font-family: 'Cutive';
+  color: #16a085;
+  text-shadow: -1px 0 #2c3e50, 0 1px #2c3e50, 1px 0 #2c3e50, 0 -1px #2c3e50;
+}
+
+.wrappable { overflow: hidden; word-wrap: break-word; }

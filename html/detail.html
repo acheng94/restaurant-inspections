@@ -9,126 +9,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="/detail.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cutive">
+    <link rel="stylesheet" type="text/css" href="content.css">
   </head>
   
-  <style>
-  
-    html, body {
-      margin: 0px;
-    }
-  
-    body {
-      background-color: #16a085;
-      padding: 0px;
-    }
-  
-    #tableindex {
-        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-        border-collapse: collapse;
-        table-layout:fixed;
-        width: 80%;
-        margin-left: 10%;
-        margin-right: 10%;
-    }
-
-    #tableindex td, #tableindex th {
-        border: 3px solid #f39c12;
-        padding: 8px;
-        word-wrap:break-word;
-    }
-
-    #tableindex tr:nth-child(even){background-color: #f1c40f;}
-
-    #tableindex tr:hover {background-color: #f39c12;}
-
-    #tableindex th {
-        padding-top: 12px;
-        padding-bottom: 12px;
-        text-align: left;
-        background-color: #f39c12;
-        color: white;
-    }
-  
-    .container {
-      position:relative;
-      background-color: #ecf0f1;
-      width: 70%;
-      height: 100%;
-      margin: 20px auto;
-      
-      
-      /*
-      position: relative;
-      height: 100%;
-      width: 1250px;
-      max-width: 1250px;
-      */
-    }
-  
-    .btn-group {
-      position:relative;
-      background-color: Transparent;
-      width: 70%;
-      height: 100%;
-      margin: 0px auto;
-    }
-  
-    .btn-group button {
-      background-color: Transparent; /* Green background */
-      border: none; /* Green border */
-      cursor: pointer; /* Pointer/hand icon */
-      float: left; /* Float the buttons side by side */
-      font-family: 'Cutive';
-    }
-
-    .btn-group .logo {
-      text-align: left;
-      padding: 10px 24px; /* Some padding */
-      font-size: 30px;
-      color: #16a085;
-      text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
-    }
-
-    .menu button {
-      color: white; /* White text */
-      padding: 10px 24px; /* Some padding */
-      font-size: 15px;
-    }
-
-    /* Clear floats (clearfix hack) */
-    .btn-group:after {
-      content: "";
-      clear: both;
-      display: table;
-    }
-
-    .btn-group button:not(:last-child) {
-      border-right: none; /* Prevent double borders */
-    }
-  
-    /* Get rid of blue outline */
-    .btn-group button:focus {
-      outline:0;
-    }
-
-    /* Add a background color on hover */
-    .menu button:hover {
-      background-color: #1abc9c;
-    }
-  
-    h1 {
-      font-family: 'Cutive';
-      color: #16a085;
-      text-shadow: -1px 0 #2c3e50, 0 1px #2c3e50, 1px 0 #2c3e50, 0 -1px #2c3e50;
-    }
-  
-    .wrappable { overflow: hidden; word-wrap: break-word; }
-  
-
-  </style>
-  
   <body ng-app="Detail">
-    <div class="btn-group">
+    <div class="menudiv">
       <button class="logo" onclick="location.href = '/';">safe4eats</button>
       <div class="menu">
         <button onclick="location.href = 'search';">Search</button>
@@ -182,7 +67,7 @@
             <td style="width: 20%"> {{ x.id }} </td>
             <td style="width: 10%"> {{ x.grade }} </td>
             <td style="width: 15%"> {{ x.demerits }} </td>
-            <td style="width: 35%"> {{ x.violations }} </td>
+            <td style="width: 35%"> {{ vioFormat(x.violations) }} </td>
           </tr>
         </table>
         <br>

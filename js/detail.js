@@ -7,6 +7,15 @@ app.controller('detailController', function($scope, $http, $location) {
   $scope.dateSubstr = function(datetime) {
     return datetime.substring(0,10)
   }
+  
+  $scope.vioFormat = function(violations) {
+    var vioArr = violations.split(",")
+    var vioSet = new Set(vioArr)
+    if (vioSet.has("000")) {
+      vioSet.delete("000");
+    }
+    return Array.from(vioSet).join(',')
+  }
 
   /*** Decode id from URL ***/
   $scope.location = $location;
