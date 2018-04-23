@@ -1,32 +1,5 @@
 <!DOCTYPE html>
 <html>
- 
-  <style>
-    #tableindex {
-        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-        border-collapse: collapse;
-        width: 50%;
-        margin-left: 25%;
-        margin-right: 25%;
-    }
-
-    #tableindex td, #tableindex th {
-        border: 1px solid #ddd;
-        padding: 8px;
-    }
-
-    #tableindex tr:nth-child(even){background-color: #f2f2f2;}
-
-    #tableindex tr:hover {background-color: #ddd;}
-
-    #tableindex th {
-        padding-top: 12px;
-        padding-bottom: 12px;
-        text-align: left;
-        background-color: #4CAF50;
-        color: white;
-    }
-  </style>
   
   <head>
     <title>Search</title>
@@ -34,21 +7,52 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cutive">
+    <link rel="stylesheet" type="text/css" href="content.css">
     <script src="/search.js"></script>
   </head>
-  <body>
-    <center><h1 style="color: #4CAF50">Search</h1></center>
     <body ng-app="Search">
-      <div ng-controller="searchController">
-        <table id="tableindex">
-          <tr>
-            <th>Table Name</th>
-          </tr>
-          <tr ng-repeat="x in data">
-            <td> {{ x.Tables_in_yelp_db }} </td>
-          </tr>
-        </table>
+      <div class="menudiv">
+      <button class="logo" onclick="location.href = '/';">safe4eats</button>
+      <div class="menu">
+        <button onclick="location.href = 'search';">Search</button>
+        <button onclick="location.href = 'ranking';">Top 10</button>
+        <button onclick="location.href = 'restaurant';">Restaurants</button>
+        <button onclick="location.href = 'detail';">Details</button>
       </div>
+    </div>
+    <div class="container">
+    <center><h1 style="color: #4CAF50">Search by Cuisine and Neighborhood</h1></center>
+      <div ng-controller="searchController">
+            <p>
+                <center>
+                    <input ng-model="searchCuisine" placeholder="Enter cuisine">
+                    <input ng-model="searchNeighborhood" placeholder="Enter neighborhood">
+                    <button ng-click="loadData()">Search</button>
+                </center>
+                <br />
+            </p> 
+        <div id="searchcontainer" style="display: none">
+            <table id="tableindex">
+                <!-- Show table header -->
+                <tr>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Stars</th>
+                    <th>Grade</th>
+                </tr>
+                <!-- Render table data -->
+                <tr ng-repeat="x in data">
+                    <td><a ng-href="/detail?id={{ x.id }}">{{ x.name }}</a></td>
+                    <td>{{ x.address }}</td>
+                    <td>{{ x.stars }}&#11088</td>
+                    <td>{{ x.grade }}</td>
+               </tr>
+            </table>
+            <br />
+        </div>
+      </div>
+  </div>
   </body>
 </html>
 

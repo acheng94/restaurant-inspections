@@ -150,19 +150,29 @@ app.get('/get_rankings/:values', function(request, response) {
                 order by demerits) withdate \
                 limit 10';
 
+  connection.query(query, function (error, results, fields) {
+    if (error) {
+      response.send(error.sqlMessage);
+    } else {
+      console.log(results);
+      response.json(results);
+    }
+  });
+})
 
-  // var query = 'select withdate.id, withdate.name, withdate.address, withdate.stars, withdate.demerits from \
-  //               (select distinct r.id as id, r.name as name, r.address as address, r.stars as stars, md.demerits as demerits, max(i.inspectiondate) as idate \
-  //               from restaurants r \
-  //               join inspections i \
-  //               on r.address = i.address \
-  //               join max_demerits md \
-  //               on md.ID = i.id \
-  //               and LOCATE(r.name, i.restaurantname) > 0 \
-  //               where r.neighborhood like "%' + request.params.values + '%" \
-  //               group by name, address, stars, demerits \
-  //               order by demerits) withdate \
-  //               limit 10';
+/*** Return list of restaurants for a cuisine and neighborhood ***/
+app.get('/get_cuisine/:cuisine/:neighborhood', function(request, response) {
+    var query = 'select all_dates.id, all_dates.name, all_dates.address, all_dates.stars, all_dates.category, all_dates.grade \
+                  from \
+                  (select  r.id as id, r.name as name, r.address as address, r.stars as stars, rc.category as category, i.grade as grade, max(i.inspectiondate) as dates \
+                  from restaurants r \
+                  join inspections i \
+                  on r.address = i.address \
+                  join restaurant_category rc \
+                  on rc.business_id = r.id \
+                  and LOCATE(r.name, i.restaurantname) > 0 \
+                  where rc.category like "%' + request.params.cuisine + '%" and r.neighborhood like "%' + request.params.neighborhood + '%" \
+                  group by id) all_dates';
   connection.query(query, function (error, results, fields) {
     if (error) {
       response.send(error.sqlMessage);
