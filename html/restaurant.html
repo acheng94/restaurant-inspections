@@ -43,7 +43,7 @@
       <button class="logo" onclick="location.href = '/';">safe4eats</button>
       <div class="menu">
         <button onclick="location.href = 'search';">Search</button>
-        <button onclick="location.href = 'ranking';">Ranking</button>
+        <button onclick="location.href = 'ranking';">Top 10</button>
         <button onclick="location.href = 'restaurant';">Restaurants</button>
         <button onclick="location.href = 'detail';">Details</button>
       </div>
@@ -65,14 +65,14 @@
                     <th>Name</th>
                     <th>Address</th>
                     <th>Stars</th>
-                    <th># of Violations</th>
+                    <th>Current Grade</th>
                 </tr>
                 <!-- Render table data -->
                 <tr ng-repeat="x in data">
                     <td><a ng-href="/detail?id={{ x.id }}">{{ x.name }}</a></td>
                     <td>{{ x.address }}</td>
                     <td>{{ x.stars }}&#11088</td>
-                    <td>{{ x.violation_count }}</td>
+                    <td>{{ x.grade }}</td>
                </tr>
             </table>
             <br />

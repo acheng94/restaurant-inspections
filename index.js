@@ -111,21 +111,58 @@ app.get('/detail_vio/:values', function(request, response) {
 
 /*** Return list of restaurants for a search term ***/
 app.get('/get_restaurants/:values', function(request, response) {
-  var query = 'select all_dates.id, all_dates.name, all_dates.address, all_dates.stars, max(all_dates.idate) as most_recent_inspection, \
-                    all_dates.violation_count from \
-                    (select r.id as id, r.name as name, r.address as address, r.stars as stars, i.inspectiondate as idate, count(iv.id) as violation_count \
-                        from restaurants r \
-                        join inspections i \
-                        on r.address = i.address \
-                        join inspection_violations iv \
-                        on i.id = iv.id \
-                        join restaurant_category rc \
-                        on rc.business_id = r.id \
-                        and LOCATE(r.name, i.restaurantname) > 0 \
-                        group by r.id, r.name, r.address, r.stars, i.inspectiondate) all_dates \
+    var query = 'select all_dates.id, all_dates.name, all_dates.address, all_dates.stars, \
+                  max(all_dates.idate) as most_recent_inspection, \
+                  all_dates.grade as grade, all_dates.review_count as review_count \
+                  from ( \
+                        select r.id as id, r.name as name, r.address as address, r.stars as stars, i.inspectiondate as idate, i.grade as grade, r.review_count as review_count \
+                            from restaurants r \
+                            join inspections i \
+                            on r.address = i.address \
+                            and LOCATE(r.name, i.restaurantname) > 0 \
+                            group by id, name, address, stars, inspectiondate, grade) all_dates \
                     where all_dates.name like "%' + request.params.values + '%" \
                     group by all_dates.id, all_dates.name, all_dates.address, all_dates.stars \
+                    order by review_count desc \
                     limit 10';
+  connection.query(query, function (error, results, fields) {
+    if (error) {
+      response.send(error.sqlMessage);
+    } else {
+      console.log(results);
+      response.json(results);
+    }
+  });
+})
+
+/*** Return list of top 10 restaurants for a neighborhood ***/
+app.get('/get_rankings/:values', function(request, response) {
+  var query = 'select withdate.id, withdate.name, withdate.grade, withdate.address, withdate.stars, withdate.demerits from \
+                (select distinct r.id as id, r.name as name, r.address as address, r.stars as stars, md.demerits as demerits, i.grade as grade, max(i.inspectiondate) as idate \
+                from restaurants r \
+                join inspections i \
+                on r.address = i.address \
+                join max_demerits md \
+                on md.ID = i.id \
+                and LOCATE(r.name, i.restaurantname) > 0 \
+                where r.neighborhood like "%' + request.params.values + '%" \
+                group by name, address, stars, demerits \
+                order by demerits) withdate \
+                limit 10';
+
+
+  // var query = 'select withdate.id, withdate.name, withdate.address, withdate.stars, withdate.demerits from \
+  //               (select distinct r.id as id, r.name as name, r.address as address, r.stars as stars, md.demerits as demerits, max(i.inspectiondate) as idate \
+  //               from restaurants r \
+  //               join inspections i \
+  //               on r.address = i.address \
+  //               join max_demerits md \
+  //               on md.ID = i.id \
+  //               and LOCATE(r.name, i.restaurantname) > 0 \
+  //               where r.neighborhood like "%' + request.params.values + '%" \
+  //               group by name, address, stars, demerits \
+  //               order by demerits) withdate \
+  //               limit 10';
   connection.query(query, function (error, results, fields) {
     if (error) {
       response.send(error.sqlMessage);
