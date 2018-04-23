@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
  
-  <style>
+  <!-- <style>
     #tableindex {
         font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
         border-collapse: collapse;
@@ -26,7 +26,7 @@
         background-color: #4CAF50;
         color: white;
     }
-  </style>
+  </style> -->
   
   <head>
     <title>Restaurant</title>
@@ -34,34 +34,49 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cutive">
+    <link rel="stylesheet" type="text/css" href="content.css">
     <script src="/restaurant.js"></script>
   </head>
-  <body>
-    <center><h1 style="color: #4CAF50">Restaurant</h1></center>
-    <body ng-app="Restaurant">
+  <body ng-app="Restaurant">
+    <div class="menudiv">
+      <button class="logo" onclick="location.href = '/';">safe4eats</button>
+      <div class="menu">
+        <button onclick="location.href = 'search';">Search</button>
+        <button onclick="location.href = 'ranking';">Ranking</button>
+        <button onclick="location.href = 'restaurant';">Restaurants</button>
+        <button onclick="location.href = 'detail';">Details</button>
+      </div>
+    </div>
+    <div class="container">
+    <center><h1 style="color: #4CAF50">Search Restaurant</h1></center>
       <div ng-controller="restaurantController">
-        <p>
-            Enter name:  
-            <input ng-model="searchName" placeholder="Name">
-            <button ng-click="loadData()">Search</button>
+            <p>
+                <center>
+                    <input ng-model="searchName" placeholder="Name">
+                    <button ng-click="loadData()">Search</button>
+                </center>
+                <br />
+            </p> 
+        <div id="restcontainer" style="display: none">
+            <table id="tableindex">
+                <!-- Show table header -->
+                <tr>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Stars</th>
+                    <th># of Violations</th>
+                </tr>
+                <!-- Render table data -->
+                <tr ng-repeat="x in data">
+                    <td><a ng-href="/detail?id={{ x.id }}">{{ x.name }}</a></td>
+                    <td>{{ x.address }}</td>
+                    <td>{{ x.stars }}&#11088</td>
+                    <td>{{ x.violation_count }}</td>
+               </tr>
+            </table>
             <br />
-        </p> 
-        <table id="tableindex">
-            <!-- Show table header -->
-            <tr>
-                <td><strong>Name</strong></td>
-                <td><strong>Address</strong></td>
-                <td><strong>Stars</strong></td>
-                <td><strong># of Violations</strong></td>
-            </tr>
-            <!-- Render table data -->
-            <tr ng-repeat="x in data">
-                <td><a ng-href="/detail?id={{ x.id }}">{{ x.name }}</a></td>
-                <td>{{ x.address }}</td>
-                <td>{{ x.stars }}</td>
-                <td>{{ x.violation_count }}</td>
-           </tr>
-        </table>
+        </div>
         <!-- <table id="tableindex">
           <tr>
             <th>Table Name</th>
@@ -71,6 +86,7 @@
           </tr>
         </table> -->
       </div>
+  </div>
   </body>
 </html>
 

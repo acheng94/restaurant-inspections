@@ -27,10 +27,10 @@ body {
 }
 
 /* Changes color of even rows */
-#tableindex tr:nth-child(even){background-color: #f1c40f;}
+/*#tableindex tr:nth-child(even){background-color: #f1c40f;}*/
 
 /* Changes color of row when hovering */
-#tableindex tr:hover {background-color: #f39c12;}
+#tableindex tr:hover {background-color: #f1c40f;}
 
 /* Header row specific formatting */
 #tableindex th {
@@ -41,10 +41,15 @@ body {
     color: white;
 }
 
+/* Style Links */
+a {
+    color: #3498db;
+}
+
 /* Overall container */
 .container {
   position:relative;
-  background-color: #ecf0f1;
+  background-color: #ffffff;
   width: 70%;
   height: 100%;
   margin: 20px auto;
