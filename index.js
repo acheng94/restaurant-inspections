@@ -211,6 +211,10 @@ app.get('/detail/', function(request, response) {
   response.sendFile(path.join(__dirname, '/', 'html/detail.html'));
 })
 
+app.get('/about/', function(request, response) {
+  response.sendFile(path.join(__dirname, '/', 'html/about.html'));
+})
+
 /*****************************************************************************************
  * JS
  *****************************************************************************************/
