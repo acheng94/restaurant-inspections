@@ -229,6 +229,10 @@ app.get('/about/', function(request, response) {
   response.sendFile(path.join(__dirname, '/', 'html/about.html'));
 })
 
+app.get('/worst/', function(request, response) {
+  response.sendFile(path.join(__dirname, '/', 'html/worst.html'));
+})
+
 /*****************************************************************************************
  * JS
  *****************************************************************************************/
@@ -247,6 +251,10 @@ app.get('/restaurant.js', function(request, response) {
 
 app.get('/detail.js', function(request, response) {
   response.sendFile(path.join(__dirname, '/', 'js/detail.js'));
+})
+
+app.get('/worst.js', function(request, response) {
+  response.sendFile(path.join(__dirname, '/', 'js/worst.js'));
 })
 
 /*****************************************************************************************

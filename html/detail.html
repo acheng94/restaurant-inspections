@@ -7,6 +7,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC36YdPR6O2Zo0mrsebrOPvR6t_4KA8s6Q"></script>
     <script src="/detail.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cutive">
     <link rel="stylesheet" type="text/css" href="content.css">
@@ -19,6 +20,7 @@
         <button onclick="location.href = 'search';">Search</button>
         <button onclick="location.href = 'ranking';">Top 10</button>
         <button onclick="location.href = 'restaurant';">Restaurants</button>
+        <button onclick="location.href = 'worst';">Worst</button>
         <button onclick="location.href = 'about';">About</button>
       </div>
     </div>
@@ -31,6 +33,8 @@
       <div class="container" id="yelpcontainer" style="display: none">
         <center><h1>Restaurant Details</h1></center>
         <table id="tableindex" ng-repeat="x in yelpdata">
+        <div id="map" style="margin: auto; width: 80%; height: 250px;"></div>
+        <br>
           <tr><th style="width: 30%">Field</th><th style="width: 70%">Result</th></tr>
           <!-- <tr><td style="width: 30%">ID</td><td style="width: 70%"> {{ x.id }} </td></tr> -->
           <tr><td style="width: 30%">Name</td><td style="width: 70%"> {{ x.name }} </td></tr>
@@ -39,11 +43,8 @@
           <tr><td style="width: 30%">City</td><td style="width: 70%"> {{ x.city }} </td></tr>
           <tr><td style="width: 30%">State</td><td style="width: 70%"> {{ x.state }} </td></tr>
           <tr><td style="width: 30%">Postal code</td><td style="width: 70%"> {{ x.postal_code }} </td></tr>
-          <tr><td style="width: 30%">Latitude</td><td style="width: 70%"> {{ x.latitude }} </td></tr>
-          <tr><td style="width: 30%">Longitude</td><td style="width: 70%"> {{ x.longitude }} </td></tr>
           <tr><td style="width: 30%">Stars</td><td style="width: 70%"> {{ x.stars }} </td></tr>
-          <tr><td style="width: 30%">Review_count</td><td style="width: 70%"> {{ x.review_count }} </td></tr>
-          <tr><td style="width: 30%">Is open</td><td style="width: 70%"> {{ x.is_open }} </td></tr>
+          <tr><td style="width: 30%">Reviews</td><td style="width: 70%"> {{ x.review_count }} </td></tr>
         </table>
         <br>
       </div>

@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html>
-  
   <head>
-    <title>Top 10</title>
+    <title>Top 10 Worst</title>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cutive">
     <link rel="stylesheet" type="text/css" href="content.css">
-    <script src="/ranking.js"></script>
+    <script src="/worst.js"></script>
   </head>
-  <body ng-app="Ranking">
+  <body ng-app="Worst">
     <div class="menudiv">
       <button class="logo" onclick="location.href = '/';">safe4eats</button>
       <div class="menu">
@@ -22,36 +21,28 @@
         <button onclick="location.href = 'about';">About</button>
       </div>
     </div>
-    <div class="container">
-    <center><h1 style="color: #4CAF50">Neighborhood Cleanest 10</h1></center>
-      <div ng-controller="rankingController">
-            <p>
-                <center>
-                    <input ng-model="searchName" placeholder="Enter neighborhood">
-                    <button ng-click="loadData()">Search</button>
-                </center>
-                <br />
-            </p> 
-        <div id="rankcontainer" style="display: none">
+  <div class="container">
+    <center><h1 style="color: #4CAF50">Top 10 Most Total Violations in History</h1></center>
+      <div ng-controller="badrankingController">
+          <div id="worstcontainer" style="display: none">
             <table id="tableindex">
-                <!-- Show table header -->
                 <tr>
                     <th>Name</th>
                     <th>Address</th>
                     <th>Stars</th>
-                    <th>Grade</th>
+                    <th>Number of Violations</th>
                 </tr>
                 <!-- Render table data -->
-                <tr ng-repeat="x in data">
-                    <td><a ng-href="/detail?id={{ x.id }}">{{ x.name }}</a></td>
+                <tr ng-repeat="x in topviodata">
+                    <td><a ng-href="/detail?id={{ x.business_id }}">{{ x.restaurantname }}</a></td>
                     <td>{{ x.address }}</td>
                     <td>{{ x.stars }}&#11088</td>
-                    <td>{{ x.grade }}</td>
+                    <td>{{ x.numviolations }}</td>
                </tr>
             </table>
             <br />
-        </div>
-    </div>
+          </div>
+      </div>
   </div>
   </body>
 </html>
