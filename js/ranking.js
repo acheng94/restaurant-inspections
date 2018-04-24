@@ -14,12 +14,3 @@ app.controller('rankingController', function($scope, $http) {
         });
     };
 });
-    
-app.controller('badrankingController', function($scope, $http) {
-  var topviorequest = $http.get('get_rankings_most_vio');
-  topviorequest.success(function(topviodata) {
-    $scope.topviodata = topviodata;
-    noinspdisp.style.display = $scope.inspdata == "" ? "block" : "none";
-    inspdisp.style.display = $scope.inspdata == "" ? "none" : "block";
-  });
-});
