@@ -160,6 +160,20 @@ app.get('/get_rankings/:values', function(request, response) {
   });
 })
 
+/*** Return list of top 10 restaurants most violations in history with 4*+ ***/
+app.get('/get_rankings_most_vio', function(request, response) {
+  var query = 'SELECT hids.business_id, hids.restaurantname, hids.address, stars, count(violation) AS numviolations FROM (SELECT highstar.id as business_id, h.id, h.restaurantname, h.address, stars FROM (SELECT id,name,address,stars FROM business b WHERE stars >= 4) highstar JOIN healthinspect h ON LOCATE(highstar.name, h.restaurantname) > 0 AND highstar.address=h.address) hids JOIN inspection_violations v ON hids.id=v.id GROUP BY hids.restaurantname,hids.address ORDER BY numviolations DESC LIMIT 10';
+
+  connection.query(query, function (error, results, fields) {
+    if (error) {
+      response.send(error.sqlMessage);
+    } else {
+      console.log(results);
+      response.json(results);
+    }
+  });
+})
+
 /*** Return list of restaurants for a cuisine and neighborhood ***/
 app.get('/get_cuisine/:cuisine/:neighborhood', function(request, response) {
     var query = 'select all_dates.id, all_dates.name, all_dates.address, all_dates.stars, all_dates.category, all_dates.grade \
